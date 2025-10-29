@@ -1,0 +1,302 @@
+/* Base styling */
+.welcome_page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 4vh, 48px);
+  padding: clamp(32px, 6vw, 72px) clamp(20px, 6vw, 96px) clamp(48px, 8vh, 72px);
+  background: transparent;
+  color: #e2e8f0;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  overflow: hidden;
+  position: relative;
+  cursor: default;
+}
+
+.welcome_page::before {
+  content: none;
+}
+
+.welcome_header,
+.welcome_main,
+.welcome_footer {
+  position: relative;
+  z-index: 1;
+}
+
+.welcome_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.welcome_brand {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.welcome_logo {
+  width: clamp(56px, 7vw, 80px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 24px rgba(15, 23, 42, 0.12));
+}
+
+.welcome_brandText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.welcome_school {
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #38bdf8;
+}
+
+.welcome_portal {
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+  color: rgba(226, 232, 240, 0.85);
+}
+
+.welcome_sessionTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(14, 165, 233, 0.24);
+  color: #bae6fd;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+}
+
+.welcome_versionTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.16);
+  color: #93c5fd;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.welcome_session {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.welcome_main {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+
+.welcome_hero {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 3vh, 28px);
+  max-width: 560px;
+}
+
+.welcome_title {
+  font-size: clamp(2.4rem, 3.6vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #f1f5f9;
+}
+
+.welcome_subtitle {
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  line-height: 1.6;
+  color: rgba(226, 232, 240, 0.7);
+}
+
+.welcome_ctaGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.welcome_primaryButton {
+  width: fit-content;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
+  color: #f8fafc;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 18px 32px rgba(14, 165, 233, 0.2);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.welcome_primaryButton:focus-visible {
+  outline: 3px solid rgba(99, 102, 241, 0.4);
+  outline-offset: 4px;
+}
+
+.welcome_primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 36px rgba(99, 102, 241, 0.22);
+}
+
+.welcome_helper {
+  font-size: 0.9rem;
+  color: rgba(148, 163, 184, 0.85);
+}
+
+.welcome_note {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: clamp(24px, 3vw, 32px);
+  border-radius: 24px;
+  background: linear-gradient(140deg, rgba(37, 99, 235, 0.24), rgba(14, 116, 144, 0.28));
+  border: 1px solid rgba(96, 165, 250, 0.22);
+  box-shadow: 0 28px 56px rgba(2, 6, 23, 0.32);
+}
+
+.welcome_noteTitle {
+  font-size: clamp(1rem, 2vw, 1.6rem);
+  font-weight: 600;
+  color: #bae6fd;
+  margin-bottom: -10px;
+}
+
+.welcome_noteBody {
+  font-size: clamp(1rem, 1.4vw, 1rem);
+  line-height: 1.65;
+  color: rgba(226, 232, 240, 0.75);
+}
+
+.welcome_footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(148, 163, 184, 0.28);
+  color: rgba(203, 213, 225, 0.82);
+  font-size: 0.85rem;
+}
+
+.welcome_footerCopy,
+.welcome_status {
+  max-width: 420px;
+}
+
+.welcome_footerCopy a {
+  color: #93c5fd;
+  text-decoration: underline;
+  text-decoration-color: rgba(99, 102, 241, 0.6);
+  transition: color 0.2s ease;
+}
+
+.welcome_footerCopy a:hover {
+  color: #bfdbfe;
+}
+
+.welcome_footerIcon {
+  margin: 0 6px;
+  vertical-align: middle;
+}
+
+.welcome_page button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Extra Small Phones (older/smaller iPhones, Android minis) */
+@media (max-width: 360px) {
+  .welcome_page {
+    padding: 24px 18px 40px;
+  }
+
+  .welcome_header {
+    gap: 16px;
+  }
+
+  .welcome_logo {
+    width: 52px;
+  }
+
+  .welcome_title {
+    font-size: 2rem;
+  }
+
+  .welcome_note {
+    padding: 20px;
+  }
+
+  .welcome_session {
+    align-items: flex-start;
+  }
+}
+
+/* Small Phones (most iPhones, Samsung, Xiaomi) */
+@media (min-width: 361px) and (max-width: 480px) {
+  .welcome_page {
+    padding: 30px 22px 48px;
+  }
+
+  .welcome_main {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .welcome_note {
+    padding: 22px;
+  }
+
+  .welcome_session {
+    align-items: flex-start;
+  }
+}
+
+/* Large Phones and Phablets */
+@media (min-width: 481px) and (max-width: 767px) {
+  .welcome_main {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .welcome_footer {
+    flex-direction: column;
+  }
+
+  .welcome_session {
+    align-items: flex-start;
+  }
+}
+
+/* Tablets (iPad Air, iPad, Galaxy Tab, Xiaomi Pad) */
+@media (min-width: 768px) and (max-width: 1180px) {
+  .welcome_page {
+    padding: clamp(36px, 6vw, 56px) clamp(40px, 8vw, 72px) clamp(48px, 7vh, 64px);
+  }
+
+  .welcome_main {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+  }
+}
+
+/* Laptops and Desktops */
+@media (min-width: 1181px) {
+  .welcome_page {
+    padding: clamp(48px, 6vw, 96px) clamp(72px, 8vw, 136px);
+  }
+}
