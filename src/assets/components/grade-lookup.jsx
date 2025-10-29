@@ -1,9 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 import "../css/grade-lookup.css";
-import section2 from "../../../grades/section2.json";
-import section4 from "../../../grades/section4.json";
-import section5 from "../../../grades/section5.json";
 import searching from "../gif/searching.gif";
 import searching1 from "../gif/searching1.gif";
 import searching2 from "../gif/searching2.gif";
@@ -21,12 +18,7 @@ import almost2 from "../gif/allmost2.gif";
 import almost3 from "../gif/allmost3.gif";
 import almost4 from "../gif/allmost4.gif";
 import failedGif from "../gif/failed.gif";
-
-const gradeRecords = [
-  ...section2.map((record) => ({ ...record, section: "2" })),
-  ...section4.map((record) => ({ ...record, section: "4" })),
-  ...section5.map((record) => ({ ...record, section: "5" })),
-];
+import { useGradeData } from "../../context/grade-data-context.jsx";
 
 const searchingGifs = [searching, searching1, searching2, searching3, searching4];
 const notFoundGifs = [notFound1, notFound2, notFound3];
@@ -116,6 +108,8 @@ const formatGrade = (grade) => {
 };
 
 function GradeLookup({ onBack = () => {} }) {
+  const { allStudents } = useGradeData();
+  const gradeRecords = useMemo(() => allStudents, [allStudents]);
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
@@ -134,42 +128,42 @@ function GradeLookup({ onBack = () => {} }) {
 
   const handleSearch = (event) => {
     event.preventDefault();
-    const trimmed = query.trim();
-    if (!trimmed) {
-      setError("Please enter your complete ID number or last name.");
+    const trimmedQuery = query.trim();
+
+    if (!trimmedQuery) {
+      setError("Please enter your ID number or last name.");
       return;
     }
+
+    setError("");
+    setStatus("searching");
+    setActiveGif(pickRandom(searchingGifs));
+    setResult(null);
+    setPerformance(null);
 
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
 
-    setError("");
-    setResult(null);
-    setPerformance(null);
-    setActiveGif(pickRandom(searchingGifs));
-    setStatus("searching");
-
-    const lowered = trimmed.toLowerCase();
-
-    timeoutRef.current = window.setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
+      const normalizedQuery = trimmedQuery.toLowerCase();
       const match = gradeRecords.find(
-        (entry) => entry.id.toLowerCase() === lowered || entry.lastName.toLowerCase() === lowered,
+        (record) =>
+          record.id.toLowerCase() === normalizedQuery || record.lastName.toLowerCase() === normalizedQuery
       );
 
-      if (match) {
-        const assessment = evaluatePerformance(match.finalsGrade);
-        setResult(match);
-        setPerformance(assessment);
-        setActiveGif(assessment.gif);
-        setStatus("success");
-      } else {
-        setResult(null);
-        setPerformance(null);
-        setActiveGif(pickRandom(notFoundGifs));
+      if (!match) {
         setStatus("not-found");
+        setActiveGif(pickRandom(notFoundGifs));
+        return;
       }
-    }, 4000);
+
+      setResult(match);
+      const performanceResult = evaluatePerformance(match.finalsGrade);
+      setPerformance(performanceResult);
+      setActiveGif(performanceResult.gif);
+      setStatus("success");
+    }, 1500);
   };
 
   const handleBack = () => {
@@ -249,8 +243,8 @@ function GradeLookup({ onBack = () => {} }) {
   };
 
   return (
-    <motion.div className="gradeLookup" initial="hidden" animate="visible" variants={containerVariants}>
-      <motion.header className="gradeLookup_header" variants={itemVariants}>
+    <Motion.div className="gradeLookup" initial="hidden" animate="visible" variants={containerVariants}>
+      <Motion.header className="gradeLookup_header" variants={itemVariants}>
         <button type="button" className="gradeLookup_backButton" onClick={handleBack}>
           {"<"} Homepage
         </button>
@@ -258,9 +252,9 @@ function GradeLookup({ onBack = () => {} }) {
           <h1>Final Grade Lookup</h1>
           <p>Check the consolidated final grade for the section you belong to. Keep your ID number within reach.</p>
         </div>
-      </motion.header>
+      </Motion.header>
 
-      <motion.form className="gradeLookup_form" onSubmit={handleSearch} variants={itemVariants}>
+      <Motion.form className="gradeLookup_form" onSubmit={handleSearch} variants={itemVariants}>
         <label htmlFor="gradeLookupQuery" className="gradeLookup_label">
           Student identifier
         </label>
@@ -281,10 +275,10 @@ function GradeLookup({ onBack = () => {} }) {
         </div>
         <p className="gradeLookup_hint">Tip: Use your ID number for the most accurate search.</p>
         {error && <p className="gradeLookup_error">{error}</p>}
-      </motion.form>
+      </Motion.form>
 
       <AnimatePresence mode="wait">
-        <motion.section
+        <Motion.section
           key={status}
           className="gradeLookup_feedback"
           variants={itemVariants}
@@ -293,9 +287,9 @@ function GradeLookup({ onBack = () => {} }) {
           exit="exit"
         >
           {renderStatus()}
-        </motion.section>
+        </Motion.section>
       </AnimatePresence>
-    </motion.div>
+    </Motion.div>
   );
 }
 

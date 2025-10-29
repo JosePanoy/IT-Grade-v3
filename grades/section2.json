@@ -4,6 +4,31 @@
     "id": "66861",
     "finalsGrade": 3.0
   },
+    {
+    "lastName": "LICOS",
+    "id": "66935",
+    "finalsGrade": 3.0
+  },
+    {
+    "lastName": "FAGARAN",
+    "id": "66945",
+    "finalsGrade": 2.5
+  },
+    {
+    "lastName": "ESCOBAR",
+    "id": "67067",
+    "finalsGrade": 3.0
+  },
+    {
+    "lastName": "PEDROSA",
+    "id": "67032",
+    "finalsGrade": 2.75
+  },
+    {
+    "lastName": "CORDERO",
+    "id": "66139",
+    "finalsGrade": 2.25
+  },
   {
     "lastName": "ALFISCAR",
     "id": "34349",
@@ -113,6 +138,16 @@
     "lastName": "LOGRONIO",
     "id": "66853",
     "finalsGrade": 2.25
+  },
+    {
+    "lastName": "GROZEN",
+    "id": "67259",
+    "finalsGrade": 2.75
+  },
+      {
+    "lastName": "PORRAL",
+    "id": "67079",
+    "finalsGrade": 2.5
   },
   {
     "lastName": "MANGONDATO",
