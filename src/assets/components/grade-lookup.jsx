@@ -108,8 +108,15 @@ const formatGrade = (grade) => {
 };
 
 function GradeLookup({ onBack = () => {} }) {
-  const { allStudents } = useGradeData();
-  const gradeRecords = useMemo(() => allStudents, [allStudents]);
+  const { studentsBySection } = useGradeData();
+  const [selectedSection, setSelectedSection] = useState("");
+  const gradeRecords = useMemo(() => {
+    if (!selectedSection) {
+      return [];
+    }
+    const records = studentsBySection[selectedSection] ?? [];
+    return records;
+  }, [studentsBySection, selectedSection]);
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
@@ -128,6 +135,11 @@ function GradeLookup({ onBack = () => {} }) {
 
   const handleSearch = (event) => {
     event.preventDefault();
+    if (!selectedSection) {
+      setError("Please choose your section first.");
+      return;
+    }
+
     const trimmedQuery = query.trim();
 
     if (!trimmedQuery) {
@@ -147,16 +159,26 @@ function GradeLookup({ onBack = () => {} }) {
 
     timeoutRef.current = setTimeout(() => {
       const normalizedQuery = trimmedQuery.toLowerCase();
-      const match = gradeRecords.find(
-        (record) =>
-          record.id.toLowerCase() === normalizedQuery || record.lastName.toLowerCase() === normalizedQuery
-      );
+      const matches = gradeRecords.filter((record) => {
+        const idMatches = record.id.toLowerCase() === normalizedQuery;
+        const lastNameMatches = record.lastName.toLowerCase() === normalizedQuery;
+        return idMatches || lastNameMatches;
+      });
 
-      if (!match) {
+      if (matches.length === 0) {
         setStatus("not-found");
         setActiveGif(pickRandom(notFoundGifs));
         return;
       }
+
+      if (matches.length > 1) {
+        setStatus("not-found");
+        setActiveGif(pickRandom(notFoundGifs));
+        setError("Multiple matches found in this section. Please use your student ID for accuracy.");
+        return;
+      }
+
+      const match = matches[0];
 
       setResult(match);
       const performanceResult = evaluatePerformance(match.finalsGrade);
@@ -178,6 +200,13 @@ function GradeLookup({ onBack = () => {} }) {
     if (error) {
       setError("");
     }
+  };
+  const handleSectionChange = (event) => {
+    setSelectedSection(event.target.value);
+    setError("");
+    setStatus("idle");
+    setResult(null);
+    setPerformance(null);
   };
 
   const renderStatus = () => {
@@ -255,6 +284,24 @@ function GradeLookup({ onBack = () => {} }) {
       </Motion.header>
 
       <Motion.form className="gradeLookup_form" onSubmit={handleSearch} variants={itemVariants}>
+        <label htmlFor="gradeLookupSection" className="gradeLookup_label">
+          Section
+        </label>
+        <select
+          id="gradeLookupSection"
+          name="gradeLookupSection"
+          className="gradeLookup_select"
+          value={selectedSection}
+          onChange={handleSectionChange}
+        >
+          <option value="" disabled>
+            Please choose your section
+          </option>
+          <option value="section2">Section 2</option>
+          <option value="section4">Section 4</option>
+          <option value="section5">Section 5</option>
+        </select>
+        <p className="gradeLookup_hint">Tip: Choose your section and use your ID for the quickest match.</p>
         <label htmlFor="gradeLookupQuery" className="gradeLookup_label">
           Student identifier
         </label>
@@ -269,7 +316,7 @@ function GradeLookup({ onBack = () => {} }) {
             autoComplete="off"
             className="gradeLookup_input"
           />
-          <button type="submit" className="gradeLookup_submitButton">
+          <button type="submit" className="gradeLookup_submitButton" disabled={!selectedSection}>
             Search grades
           </button>
         </div>
