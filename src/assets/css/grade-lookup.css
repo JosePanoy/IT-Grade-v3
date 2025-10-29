@@ -181,7 +181,7 @@
 .gradeLookup_statusCard,
 .gradeLookup_resultCard {
   width: min(760px, 100%);
-  margin: 0 auto;
+  margin: -10px auto;
 }
 
 .gradeLookup_statusCard {
@@ -222,8 +222,6 @@
   text-align: left;
   border-radius: 20px;
   padding: clamp(20px, 3vw, 32px);
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  box-shadow: 0 24px 50px rgba(2, 6, 23, 0.28);
 }
 
 .gradeLookup_resultDetails {
@@ -359,9 +357,11 @@
 
   .gradeLookup_resultCard {
     grid-template-columns: minmax(0, 1fr);
-    gap: 20px;
+    gap: 10px;
     justify-items: stretch;
     text-align: left;
+    width: calc(100% + 20px);
+    margin: -10px -10px;
   }
 
   .gradeLookup_resultDetails {
