@@ -10,6 +10,11 @@
     "finalsGrade": 2.75
   },
       {
+    "lastName": "SECUYA",
+    "id": "63752",
+    "finalsGrade": "NC"
+  },
+      {
     "lastName": "VILLAMOSADA",
     "id": "67877",
     "finalsGrade": 2.5
@@ -38,6 +43,16 @@
     "lastName": "AVANCEÑA",
     "id": "68002",
     "finalsGrade": 2.5
+  },
+    {
+    "lastName": "CABSABAN",
+    "id": "63815",
+    "finalsGrade": "NC"
+  },
+    {
+    "lastName": "GRANA",
+    "id": "62827",
+    "finalsGrade": 2.75
   },
     {
     "lastName": "AVELINO",
