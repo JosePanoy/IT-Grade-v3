@@ -1,0 +1,14 @@
+[
+  { "lastName": "ALVAREZ", "id": "72001", "finalsGrade": 2.25 },
+  { "lastName": "BARTOLOME", "id": "72002", "finalsGrade": 2.75 },
+  { "lastName": "CRUZ", "id": "72003", "finalsGrade": 2.5 },
+  { "lastName": "DELA CRUZ", "id": "72004", "finalsGrade": 1.75 },
+  { "lastName": "ENRIQUEZ", "id": "72005", "finalsGrade": 3.0 },
+  { "lastName": "FERNANDEZ", "id": "72006", "finalsGrade": 2.0 },
+  { "lastName": "GARCIA", "id": "72007", "finalsGrade": 2.25 },
+  { "lastName": "HERNANDEZ", "id": "72008", "finalsGrade": 2.75 },
+  { "lastName": "IBAÑEZ", "id": "72009", "finalsGrade": 2.5 },
+  { "lastName": "JIMENEZ", "id": "72010", "finalsGrade": 1.5 },
+  { "lastName": "KHO", "id": "72011", "finalsGrade": 3.0 },
+  { "lastName": "LOPEZ", "id": "72012", "finalsGrade": "NC" }
+]

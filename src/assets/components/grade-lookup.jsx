@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { motion as Motion, AnimatePresence } from "framer-motion";
 import "../css/grade-lookup.css";
 import searching from "../gif/searching.gif";
@@ -108,15 +109,26 @@ const formatGrade = (grade) => {
 };
 
 function GradeLookup({ onBack = () => {} }) {
-  const { studentsBySection } = useGradeData();
+  const { subjectKey: rawSubjectKey } = useParams();
+  const navigate = useNavigate();
+  const subjectKey = (rawSubjectKey || "").toUpperCase();
+
+  useEffect(() => {
+    if (!["ITCC112", "ITPD1"].includes(subjectKey)) {
+      navigate("/lookup", { replace: true });
+    }
+  }, [subjectKey, navigate]);
+
+  const { studentsBySubject } = useGradeData();
   const [selectedSection, setSelectedSection] = useState("");
   const gradeRecords = useMemo(() => {
     if (!selectedSection) {
       return [];
     }
-    const records = studentsBySection[selectedSection] ?? [];
+    const subjectData = studentsBySubject?.[subjectKey] ?? {};
+    const records = subjectData[selectedSection] ?? [];
     return records;
-  }, [studentsBySection, selectedSection]);
+  }, [studentsBySubject, subjectKey, selectedSection]);
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
@@ -299,28 +311,32 @@ function GradeLookup({ onBack = () => {} }) {
           </option>
           <option value="section2">Section 2</option>
           <option value="section4">Section 4</option>
-          <option value="section5">Section 5</option>
+          {subjectKey === "ITCC112" && <option value="section5">Section 5</option>}
         </select>
-        <p className="gradeLookup_hint">Tip: Choose your section and use your ID for the quickest match.</p>
-        <label htmlFor="gradeLookupQuery" className="gradeLookup_label">
-          Student identifier
-        </label>
-        <div className="gradeLookup_inputRow">
-          <input
-            id="gradeLookupQuery"
-            name="gradeLookupQuery"
-            type="text"
-            value={query}
-            onChange={handleInputChange}
-            placeholder="Enter your ID number or last name"
-            autoComplete="off"
-            className="gradeLookup_input"
-          />
-          <button type="submit" className="gradeLookup_submitButton" disabled={!selectedSection}>
-            Search grades
-          </button>
-        </div>
-        <p className="gradeLookup_hint">Tip: Use your ID number for the most accurate search.</p>
+        {selectedSection && (
+          <>
+            <p className="gradeLookup_hint">Tip: Choose your section and use your ID for the quickest match.</p>
+            <label htmlFor="gradeLookupQuery" className="gradeLookup_label">
+              Student identifier
+            </label>
+            <div className="gradeLookup_inputRow">
+              <input
+                id="gradeLookupQuery"
+                name="gradeLookupQuery"
+                type="text"
+                value={query}
+                onChange={handleInputChange}
+                placeholder="Enter your ID number or last name"
+                autoComplete="off"
+                className="gradeLookup_input"
+              />
+              <button type="submit" className="gradeLookup_submitButton" disabled={!selectedSection}>
+                Search grades
+              </button>
+            </div>
+            <p className="gradeLookup_hint">Tip: Use your ID number for the most accurate search.</p>
+          </>
+        )}
         {error && <p className="gradeLookup_error">{error}</p>}
       </Motion.form>
 

@@ -1,0 +1,15 @@
+[
+  { "lastName": "MENDOZA", "id": "74001", "finalsGrade": 2.25 },
+  { "lastName": "NAVARRO", "id": "74002", "finalsGrade": 2.0 },
+  { "lastName": "OCAMPO", "id": "74003", "finalsGrade": 2.75 },
+  { "lastName": "PEREZ", "id": "74004", "finalsGrade": 3.0 },
+  { "lastName": "QUINTO", "id": "74005", "finalsGrade": 2.5 },
+  { "lastName": "RAMOS", "id": "74006", "finalsGrade": 1.75 },
+  { "lastName": "SANTOS", "id": "74007", "finalsGrade": 2.25 },
+  { "lastName": "TAN", "id": "74008", "finalsGrade": 2.5 },
+  { "lastName": "UGALDE", "id": "74009", "finalsGrade": 2.75 },
+  { "lastName": "VALDEZ", "id": "74010", "finalsGrade": 2.0 },
+  { "lastName": "WENCESLAO", "id": "74011", "finalsGrade": 3.0 },
+  { "lastName": "YU", "id": "74012", "finalsGrade": "NC" }
+]
+

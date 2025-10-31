@@ -1,9 +1,12 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
-import section2 from "../../grades/section2.json";
-import section4 from "../../grades/section4.json";
-import section5 from "../../grades/section5.json";
+import section2 from "../../grades/ITCC112/section2.json";
+import section4 from "../../grades/ITCC112/section4.json";
+import section5 from "../../grades/ITCC112/section5.json";
+import itpd1Section2 from "../../grades/ITPD1/section2.json";
+import itpd1Section4 from "../../grades/ITPD1/section4.json";
 
-const STORAGE_KEY = "itGrades:students";
+const STORAGE_KEY = "itGrades:studentsBySubject";
+const LEGACY_STORAGE_KEY = "itGrades:students";
 
 const GradeDataContext = createContext(null);
 
@@ -14,10 +17,16 @@ const clone = (value) => {
   return JSON.parse(JSON.stringify(value));
 };
 
-const SECTION_MAP = {
-  section2: { label: "Section 2", records: section2 },
-  section4: { label: "Section 4", records: section4 },
-  section5: { label: "Section 5", records: section5 },
+const SUBJECT_SECTION_MAP = {
+  ITCC112: {
+    section2: { label: "Section 2", records: section2 },
+    section4: { label: "Section 4", records: section4 },
+    section5: { label: "Section 5", records: section5 },
+  },
+  ITPD1: {
+    section2: { label: "Section 2", records: itpd1Section2 },
+    section4: { label: "Section 4", records: itpd1Section4 },
+  },
 };
 
 function formatRecords(records = [], sectionKey) {
@@ -30,32 +39,61 @@ function formatRecords(records = [], sectionKey) {
 }
 
 function loadInitialData() {
-  const stored = typeof window !== "undefined" ? window.localStorage.getItem(STORAGE_KEY) : null;
+  const get = (key) => (typeof window !== "undefined" ? window.localStorage.getItem(key) : null);
 
-  if (stored) {
+  const storedNew = get(STORAGE_KEY);
+  if (storedNew) {
     try {
-      const parsed = JSON.parse(stored);
+      const parsed = JSON.parse(storedNew);
       if (parsed && typeof parsed === "object") {
         return parsed;
       }
     } catch (error) {
-      console.warn("[GradeData] Failed to parse stored data. Falling back to defaults.", error);
+      console.warn("[GradeData] Failed to parse stored subject data. Falling back to migration/defaults.", error);
     }
   }
 
-  return Object.entries(SECTION_MAP).reduce((accumulator, [key, value]) => {
-    accumulator[key] = formatRecords(value.records, key);
-    return accumulator;
+  const storedLegacy = get(LEGACY_STORAGE_KEY);
+  if (storedLegacy) {
+    try {
+      const parsedLegacy = JSON.parse(storedLegacy);
+      if (parsedLegacy && typeof parsedLegacy === "object") {
+        const itcc112 = parsedLegacy;
+        const itpd1 = Object.entries(SUBJECT_SECTION_MAP.ITPD1).reduce((acc, [sectionKey, value]) => {
+          acc[sectionKey] = formatRecords(value.records, sectionKey);
+          return acc;
+        }, {});
+        return { ITCC112: itcc112, ITPD1: itpd1 };
+      }
+    } catch (error) {
+      console.warn("[GradeData] Failed to parse legacy data. Falling back to defaults.", error);
+    }
+  }
+
+  return Object.entries(SUBJECT_SECTION_MAP).reduce((subjectAcc, [subjectKey, sections]) => {
+    subjectAcc[subjectKey] = Object.entries(sections).reduce((acc, [sectionKey, value]) => {
+      acc[sectionKey] = formatRecords(value.records, sectionKey);
+      return acc;
+    }, {});
+    return subjectAcc;
   }, {});
 }
 
 export function GradeDataProvider({ children }) {
-  const [studentsBySection, setStudentsBySection] = useState(loadInitialData);
+  const [studentsBySubject, setStudentsBySubject] = useState(loadInitialData);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(studentsBySection));
-  }, [studentsBySection]);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(studentsBySubject));
+      window.localStorage.removeItem(LEGACY_STORAGE_KEY);
+    } catch (error) {
+      // Keep app functional even if storage fails
+      console.warn("[GradeData] Failed to persist subject data to localStorage.", error);
+    }
+  }, [studentsBySubject]);
+
+  const studentsBySection = useMemo(() => studentsBySubject.ITCC112 ?? {}, [studentsBySubject]);
 
   const allStudents = useMemo(() => {
     return Object.values(studentsBySection)
@@ -72,28 +110,27 @@ export function GradeDataProvider({ children }) {
   }, [studentsBySection]);
 
   const addStudent = (sectionKey, student) => {
-    setStudentsBySection((previous) => {
+    setStudentsBySubject((previous) => {
       const next = clone(previous);
-      const section = next[sectionKey] ?? [];
-
+      next.ITCC112 = next.ITCC112 ?? { section2: [], section4: [], section5: [] };
+      const section = next.ITCC112[sectionKey] ?? [];
       section.push({
         id: String(student.id).trim(),
         lastName: String(student.lastName).trim(),
         finalsGrade: student.finalsGrade,
         section: sectionKey.replace("section", ""),
       });
-
-      next[sectionKey] = section;
+      next.ITCC112[sectionKey] = section;
       return next;
     });
   };
 
   const updateStudent = (sectionKey, studentId, updates) => {
-    setStudentsBySection((previous) => {
+    setStudentsBySubject((previous) => {
       const next = clone(previous);
-      const section = next[sectionKey] ?? [];
-
-      next[sectionKey] = section.map((entry) =>
+      const section = (next.ITCC112?.[sectionKey] ?? []);
+      next.ITCC112 = next.ITCC112 ?? { section2: [], section4: [], section5: [] };
+      next.ITCC112[sectionKey] = section.map((entry) =>
         entry.id === studentId
           ? {
               ...entry,
@@ -105,34 +142,35 @@ export function GradeDataProvider({ children }) {
             }
           : entry,
       );
-
       return next;
     });
   };
 
   const deleteStudent = (sectionKey, studentId) => {
-    setStudentsBySection((previous) => {
+    setStudentsBySubject((previous) => {
       const next = clone(previous);
-      const section = next[sectionKey] ?? [];
-      next[sectionKey] = section.filter((entry) => entry.id !== studentId);
+      const section = next.ITCC112?.[sectionKey] ?? [];
+      if (!next.ITCC112) next.ITCC112 = { section2: [], section4: [], section5: [] };
+      next.ITCC112[sectionKey] = section.filter((entry) => entry.id !== studentId);
       return next;
     });
   };
 
   const resetToDefaults = () => {
-    setStudentsBySection(loadInitialData());
+    setStudentsBySubject(loadInitialData());
   };
 
   const value = useMemo(
     () => ({
       studentsBySection,
+      studentsBySubject,
       allStudents,
       addStudent,
       updateStudent,
       deleteStudent,
       resetToDefaults,
     }),
-    [studentsBySection, allStudents],
+    [studentsBySection, studentsBySubject, allStudents],
   );
 
   return <GradeDataContext.Provider value={value}>{children}</GradeDataContext.Provider>;
