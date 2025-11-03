@@ -5,6 +5,16 @@
     "finalsGrade": 3.0
   },
     {
+    "lastName": "BEATING",
+    "id": "68346",
+    "finalsGrade": 3.0
+  },
+      {
+    "lastName": "BENEDICTO",
+    "id": "68122",
+    "finalsGrade": "NC"
+  },
+    {
     "lastName": "OBERIO",
     "id": "68083",
     "finalsGrade": 2.75
@@ -34,6 +44,11 @@
     "id": "68443",
     "finalsGrade": 2.75
   },
+        {
+    "lastName": "PAGUNTALAN",
+    "id": "68419",
+    "finalsGrade": "NC"
+  },
     {
     "lastName": "AMADOR",
     "id": "64781",
@@ -43,6 +58,16 @@
     "lastName": "AVANCEÑA",
     "id": "68002",
     "finalsGrade": 2.5
+  },
+    {
+    "lastName": "SOQUEÑA",
+    "id": "68451",
+    "finalsGrade": "NC"
+  },
+    {
+    "lastName": "CAZEÑAS",
+    "id": "65555",
+    "finalsGrade": "DROPPED"
   },
     {
     "lastName": "CABSABAN",
@@ -89,6 +114,21 @@
     "id": "68319",
     "finalsGrade": 3.0
   },
+    {
+    "lastName": "LAVARRO",
+    "id": "65172",
+    "finalsGrade": "NC"
+  },
+    {
+    "lastName": "GALITA",
+    "id": "68289",
+    "finalsGrade": "NC"
+  },
+      {
+    "lastName": "TABLE",
+    "id": "68409",
+    "finalsGrade": 3.0
+  },
   {
     "lastName": "GALERA",
     "id": "68292",
@@ -109,10 +149,25 @@
     "id": "68056",
     "finalsGrade": 3.0
   },
+    {
+    "lastName": "SOLADAY",
+    "id": "68215",
+    "finalsGrade": 3.0
+  },
+    {
+    "lastName": "MAG-ASO",
+    "id": "54070",
+    "finalsGrade": 2.25
+  },
   {
     "lastName": "MARTIN",
     "id": "68377",
     "finalsGrade": 2.25
+  },
+    {
+    "lastName": "MANCIL",
+    "id": "64255",
+    "finalsGrade": "NC"
   },
   {
     "lastName": "OBAS",
@@ -147,7 +202,12 @@
   {
     "lastName": "VELEZ",
     "id": "68112",
-    "finalsGrade": 4.0
+    "finalsGrade": 3.0
+  },
+    {
+    "lastName": "DAVILLA",
+    "id": "68439",
+    "finalsGrade": "NC"
   },
   {
     "lastName": "VILLAMOSADA",
@@ -157,7 +217,7 @@
   {
     "lastName": "VILLOTE",
     "id": "65471",
-    "finalsGrade": 5.0
+    "finalsGrade": "NC"
   },
   {
     "lastName": "VIRAYO",
