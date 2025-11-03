@@ -197,7 +197,7 @@ function GradeLookup({ onBack = () => {} }) {
       setPerformance(performanceResult);
       setActiveGif(performanceResult.gif);
       setStatus("success");
-    }, 1500);
+    }, 6500);
   };
 
   const handleBack = () => {
@@ -309,6 +309,7 @@ function GradeLookup({ onBack = () => {} }) {
           <option value="" disabled>
             Please choose your section
           </option>
+          {subjectKey === "ITCC112" && <option value="section1">Section 1</option>}
           <option value="section2">Section 2</option>
           <option value="section4">Section 4</option>
           {subjectKey === "ITCC112" && <option value="section5">Section 5</option>}

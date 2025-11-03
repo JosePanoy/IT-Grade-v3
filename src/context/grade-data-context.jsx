@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import section1 from "../../grades/ITCC112/section1.json";
 import section2 from "../../grades/ITCC112/section2.json";
 import section4 from "../../grades/ITCC112/section4.json";
 import section5 from "../../grades/ITCC112/section5.json";
@@ -19,6 +20,7 @@ const clone = (value) => {
 
 const SUBJECT_SECTION_MAP = {
   ITCC112: {
+    section1: { label: "Section 1", records: section1 },
     section2: { label: "Section 2", records: section2 },
     section4: { label: "Section 4", records: section4 },
     section5: { label: "Section 5", records: section5 },
@@ -46,7 +48,17 @@ function loadInitialData() {
     try {
       const parsed = JSON.parse(storedNew);
       if (parsed && typeof parsed === "object") {
-        return parsed;
+        // Ensure any newly added sections (e.g., section1) are present
+        const merged = clone(parsed);
+        for (const [subjectKey, sections] of Object.entries(SUBJECT_SECTION_MAP)) {
+          merged[subjectKey] = merged[subjectKey] ?? {};
+          for (const [sectionKey, value] of Object.entries(sections)) {
+            if (!Array.isArray(merged[subjectKey][sectionKey])) {
+              merged[subjectKey][sectionKey] = formatRecords(value.records, sectionKey);
+            }
+          }
+        }
+        return merged;
       }
     } catch (error) {
       console.warn("[GradeData] Failed to parse stored subject data. Falling back to migration/defaults.", error);
@@ -112,7 +124,7 @@ export function GradeDataProvider({ children }) {
   const addStudent = (sectionKey, student) => {
     setStudentsBySubject((previous) => {
       const next = clone(previous);
-      next.ITCC112 = next.ITCC112 ?? { section2: [], section4: [], section5: [] };
+      next.ITCC112 = next.ITCC112 ?? { section1: [], section2: [], section4: [], section5: [] };
       const section = next.ITCC112[sectionKey] ?? [];
       section.push({
         id: String(student.id).trim(),
@@ -129,7 +141,7 @@ export function GradeDataProvider({ children }) {
     setStudentsBySubject((previous) => {
       const next = clone(previous);
       const section = (next.ITCC112?.[sectionKey] ?? []);
-      next.ITCC112 = next.ITCC112 ?? { section2: [], section4: [], section5: [] };
+      next.ITCC112 = next.ITCC112 ?? { section1: [], section2: [], section4: [], section5: [] };
       next.ITCC112[sectionKey] = section.map((entry) =>
         entry.id === studentId
           ? {
@@ -150,7 +162,7 @@ export function GradeDataProvider({ children }) {
     setStudentsBySubject((previous) => {
       const next = clone(previous);
       const section = next.ITCC112?.[sectionKey] ?? [];
-      if (!next.ITCC112) next.ITCC112 = { section2: [], section4: [], section5: [] };
+      if (!next.ITCC112) next.ITCC112 = { section1: [], section2: [], section4: [], section5: [] };
       next.ITCC112[sectionKey] = section.filter((entry) => entry.id !== studentId);
       return next;
     });
