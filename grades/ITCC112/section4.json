@@ -4,6 +4,11 @@
     "id": "68051",
     "finalsGrade": 3.0
   },
+    {
+    "lastName": "GONZAGA",
+    "id": "67829",
+    "finalsGrade": 3.0
+  },
   {
     "lastName": "ARCILLA",
     "id": "67820",
@@ -59,6 +64,11 @@
     "id": "67949",
     "finalsGrade": 2.75
   },
+    {
+    "lastName": "GAYONGO",
+    "id": "68071",
+    "finalsGrade": 3.0
+  },
   {
     "lastName": "FLORENDO",
     "id": "67863",
@@ -72,6 +82,11 @@
   {
     "lastName": "GANGE",
     "id": "65033",
+    "finalsGrade": 3.0
+  },
+    {
+    "lastName": "Hojilla",
+    "id": "68050",
     "finalsGrade": 3.0
   },
   {
@@ -114,6 +129,11 @@
     "id": "62813",
     "finalsGrade": 2.25
   },
+    {
+    "lastName": "Belmonte",
+    "id": "67908",
+    "finalsGrade": 5.0
+  },
   {
     "lastName": "PEDROLA",
     "id": "67842",
@@ -128,6 +148,11 @@
     "lastName": "SAZON",
     "id": "67852",
     "finalsGrade": 2.25
+  },
+    {
+    "lastName": "SABLON",
+    "id": "68009",
+    "finalsGrade": 3.0
   },
   {
     "lastName": "SIA",
