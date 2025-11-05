@@ -42,6 +42,23 @@ const itemVariants = {
 
 const pickRandom = (collection) => collection[Math.floor(Math.random() * collection.length)];
 
+// Robust text normalization for matching names and IDs
+const stripDiacritics = (text) =>
+  text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+const normalizeName = (text) =>
+  stripDiacritics(String(text ?? ""))
+    .replace(/[`'’]/g, "") // remove apostrophes/backticks
+    .replace(/\s+/g, " ") // collapse whitespace
+    .trim()
+    .toLowerCase();
+
+const normalizeNameTight = (text) => normalizeName(text).replace(/\s+/g, "");
+
+const normalizeId = (text) => String(text ?? "").trim();
+
 const normalizeGrade = (grade) => {
   if (typeof grade === "number") {
     return grade;
@@ -170,33 +187,71 @@ function GradeLookup({ onBack = () => {} }) {
     }
 
     timeoutRef.current = setTimeout(() => {
-      const normalizedQuery = trimmedQuery.toLowerCase();
-      const matches = gradeRecords.filter((record) => {
-        const idMatches = record.id.toLowerCase() === normalizedQuery;
-        const lastNameMatches = record.lastName.toLowerCase() === normalizedQuery;
-        return idMatches || lastNameMatches;
+      const qId = normalizeId(trimmedQuery);
+      const qName = normalizeName(trimmedQuery);
+      const qNameTight = normalizeNameTight(trimmedQuery);
+
+      const exactId = gradeRecords.filter((r) => normalizeId(r.id) === qId);
+      if (exactId.length === 1) {
+        const match = exactId[0];
+        setResult(match);
+        const performanceResult = evaluatePerformance(match.finalsGrade);
+        setPerformance(performanceResult);
+        setActiveGif(performanceResult.gif);
+        setStatus("success");
+        return;
+      }
+
+      const exactName = gradeRecords.filter((r) => {
+        const n = normalizeName(r.lastName);
+        return n === qName || normalizeNameTight(r.lastName) === qNameTight;
       });
-
-      if (matches.length === 0) {
-        setStatus("not-found");
-        setActiveGif(pickRandom(notFoundGifs));
+      if (exactName.length === 1) {
+        const match = exactName[0];
+        setResult(match);
+        const performanceResult = evaluatePerformance(match.finalsGrade);
+        setPerformance(performanceResult);
+        setActiveGif(performanceResult.gif);
+        setStatus("success");
         return;
       }
 
-      if (matches.length > 1) {
-        setStatus("not-found");
-        setActiveGif(pickRandom(notFoundGifs));
-        setError("Multiple matches found in this section. Please use your student ID for accuracy.");
+      // Fallback: tolerate partials if they uniquely identify a record
+      const idPartials = qId.length >= 4 ? gradeRecords.filter((r) => normalizeId(r.id).includes(qId)) : [];
+      if (idPartials.length === 1) {
+        const match = idPartials[0];
+        setResult(match);
+        const performanceResult = evaluatePerformance(match.finalsGrade);
+        setPerformance(performanceResult);
+        setActiveGif(performanceResult.gif);
+        setStatus("success");
         return;
       }
 
-      const match = matches[0];
+      const namePartials = gradeRecords.filter((r) => {
+        const n = normalizeName(r.lastName);
+        const t = normalizeNameTight(r.lastName);
+        return n.includes(qName) || t.includes(qNameTight);
+      });
+      if (namePartials.length === 1) {
+        const match = namePartials[0];
+        setResult(match);
+        const performanceResult = evaluatePerformance(match.finalsGrade);
+        setPerformance(performanceResult);
+        setActiveGif(performanceResult.gif);
+        setStatus("success");
+        return;
+      }
 
-      setResult(match);
-      const performanceResult = evaluatePerformance(match.finalsGrade);
-      setPerformance(performanceResult);
-      setActiveGif(performanceResult.gif);
-      setStatus("success");
+      if ((exactId.length + exactName.length + idPartials.length + namePartials.length) > 1) {
+        setStatus("not-found");
+        setActiveGif(pickRandom(notFoundGifs));
+        setError("Multiple close matches. Please use your full ID number.");
+        return;
+      }
+
+      setStatus("not-found");
+      setActiveGif(pickRandom(notFoundGifs));
     }, 6500);
   };
 

@@ -8,6 +8,9 @@ import itpd1Section4 from "../../grades/ITPD1/section4.json";
 
 const STORAGE_KEY = "itGrades:studentsBySubject";
 const LEGACY_STORAGE_KEY = "itGrades:students";
+// Bump this when packaged grade JSON changes to force refresh from source
+const VERSION_KEY = "itGrades:dataVersion";
+const DATA_VERSION = "2025-11-05.v2";
 
 const GradeDataContext = createContext(null);
 
@@ -43,8 +46,10 @@ function formatRecords(records = [], sectionKey) {
 function loadInitialData() {
   const get = (key) => (typeof window !== "undefined" ? window.localStorage.getItem(key) : null);
 
+  // If stored data is from an older build, ignore it and use packaged JSON.
+  const storedVersion = get(VERSION_KEY);
   const storedNew = get(STORAGE_KEY);
-  if (storedNew) {
+  if (storedVersion === DATA_VERSION && storedNew) {
     try {
       const parsed = JSON.parse(storedNew);
       if (parsed && typeof parsed === "object") {
@@ -98,6 +103,7 @@ export function GradeDataProvider({ children }) {
     if (typeof window === "undefined") return;
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(studentsBySubject));
+      window.localStorage.setItem(VERSION_KEY, DATA_VERSION);
       window.localStorage.removeItem(LEGACY_STORAGE_KEY);
     } catch (error) {
       // Keep app functional even if storage fails

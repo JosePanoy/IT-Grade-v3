@@ -1,14 +1,237 @@
 [
-  { "lastName": "ALVAREZ", "id": "72001", "finalsGrade": 2.25 },
-  { "lastName": "BARTOLOME", "id": "72002", "finalsGrade": 2.75 },
-  { "lastName": "CRUZ", "id": "72003", "finalsGrade": 2.5 },
-  { "lastName": "DELA CRUZ", "id": "72004", "finalsGrade": 1.75 },
-  { "lastName": "ENRIQUEZ", "id": "72005", "finalsGrade": 3.0 },
-  { "lastName": "FERNANDEZ", "id": "72006", "finalsGrade": 2.0 },
-  { "lastName": "GARCIA", "id": "72007", "finalsGrade": 2.25 },
-  { "lastName": "HERNANDEZ", "id": "72008", "finalsGrade": 2.75 },
-  { "lastName": "IBAÑEZ", "id": "72009", "finalsGrade": 2.5 },
-  { "lastName": "JIMENEZ", "id": "72010", "finalsGrade": 1.5 },
-  { "lastName": "KHO", "id": "72011", "finalsGrade": 3.0 },
-  { "lastName": "LOPEZ", "id": "72012", "finalsGrade": "NC" }
+  {
+    "lastName": "AGARRADO",
+    "id": "65185",
+    "finalsGrade": "2.25"
+  },
+  {
+    "lastName": "ALVISSI",
+    "id": "64564",
+    "finalsGrade": "1.7"
+  },
+  {
+    "lastName": "AMORTE",
+    "id": "65429",
+    "finalsGrade": "NC"
+  },
+  {
+    "lastName": "ANCUNA",
+    "id": "64007",
+    "finalsGrade": "2.5"
+  },
+  {
+    "lastName": "ARROYO",
+    "id": "65775",
+    "finalsGrade": "3.0"
+  },
+  {
+    "lastName": "BARRETTO",
+    "id": "63678",
+    "finalsGrade": "2.75"
+  },
+  {
+    "lastName": "BENDANILLO",
+    "id": "65208",
+    "finalsGrade": "3.0"
+  },
+  {
+    "lastName": "BERAMO",
+    "id": "63679",
+    "finalsGrade": "3.0"
+  },
+  {
+    "lastName": "BULAN",
+    "id": "36184",
+    "finalsGrade": "NC"
+  },
+  {
+    "lastName": "CALAMBRO",
+    "id": "64336",
+    "finalsGrade": "2.75"
+  },
+  {
+    "lastName": "CAPILITAN",
+    "id": "65891",
+    "finalsGrade": "3.0"
+  },
+  {
+    "lastName": "CASIPLE",
+    "id": "63745",
+    "finalsGrade": "2.5"
+  },
+  {
+    "lastName": "CORTEZ",
+    "id": "65524",
+    "finalsGrade": "2.75"
+  },
+  {
+    "lastName": "DAJAY",
+    "id": "64661",
+    "finalsGrade": "3.0"
+  },
+  {
+    "lastName": "DAYADAY",
+    "id": "64612",
+    "finalsGrade": "3.0"
+  },
+  {
+    "lastName": "DEJECACION",
+    "id": "64627",
+    "finalsGrade": "3.0"
+  },
+  {
+    "lastName": "ESCANTILLA",
+    "id": "64850",
+    "finalsGrade": "2.5"
+  },
+  {
+    "lastName": "FELICIANO",
+    "id": "65217",
+    "finalsGrade": "3.0"
+  },
+  {
+    "lastName": "GALAURA",
+    "id": "65127",
+    "finalsGrade": "2.75"
+  },
+  {
+    "lastName": "GREGORI",
+    "id": "64936",
+    "finalsGrade": "2.5"
+  },
+  {
+    "lastName": "IGNACIO",
+    "id": "58824",
+    "finalsGrade": "NC"
+  },
+  {
+    "lastName": "MADAYAG",
+    "id": "65218",
+    "finalsGrade": "1.9"
+  },
+  {
+    "lastName": "MANDALEJO",
+    "id": "64718",
+    "finalsGrade": "2.75"
+  },
+  {
+    "lastName": "MOSQUEDA",
+    "id": "65153",
+    "finalsGrade": "2.0"
+  },
+  {
+    "lastName": "MUNION",
+    "id": "64358",
+    "finalsGrade": "NC"
+  },
+  {
+    "lastName": "NABAJO",
+    "id": "64516",
+    "finalsGrade": "2.25"
+  },
+  {
+    "lastName": "NEPANGUE",
+    "id": "68146",
+    "finalsGrade": "NC"
+  },
+  {
+    "lastName": "ORO",
+    "id": "64334",
+    "finalsGrade": "3.0"
+  },
+  {
+    "lastName": "OSCARES",
+    "id": "64125",
+    "finalsGrade": "NC"
+  },
+  {
+    "lastName": "PACANA",
+    "id": "65076",
+    "finalsGrade": "NC"
+  },
+  {
+    "lastName": "PACLIBAR",
+    "id": "64488",
+    "finalsGrade": "2.5"
+  },
+  {
+    "lastName": "PADUALA",
+    "id": "64666",
+    "finalsGrade": "3.0"
+  },
+  {
+    "lastName": "PAGAYON",
+    "id": "64605",
+    "finalsGrade": "2.75"
+  },
+  {
+    "lastName": "PALCONAGA",
+    "id": "64838",
+    "finalsGrade": "3.0"
+  },
+  {
+    "lastName": "PARIÑAL",
+    "id": "63534",
+    "finalsGrade": "1.9"
+  },
+  {
+    "lastName": "PASEO",
+    "id": "63306",
+    "finalsGrade": "3.0"
+  },
+  {
+    "lastName": "PASMALA",
+    "id": "65381",
+    "finalsGrade": "3.0"
+  },
+  {
+    "lastName": "QUITAIN",
+    "id": "64813",
+    "finalsGrade": "1.6"
+  },
+  {
+    "lastName": "SERANTES",
+    "id": "64714",
+    "finalsGrade": "2.25"
+  },
+  {
+    "lastName": "SEVILLA",
+    "id": "63989",
+    "finalsGrade": "NC"
+  },
+  {
+    "lastName": "SOLIS",
+    "id": "64916",
+    "finalsGrade": "3.0"
+  },
+  {
+    "lastName": "SUBONG",
+    "id": "63611",
+    "finalsGrade": "2.25"
+  },
+  {
+    "lastName": "TIJAM",
+    "id": "56062",
+    "finalsGrade": "2.5"
+  },
+  {
+    "lastName": "TOBIAS",
+    "id": "64665",
+    "finalsGrade": "NC"
+  },
+  {
+    "lastName": "VILLALUNA",
+    "id": "64250",
+    "finalsGrade": "2.75"
+  },
+  {
+    "lastName": "VILLAR",
+    "id": "64033",
+    "finalsGrade": "3.0"
+  },
+  {
+    "lastName": "VILLARIN",
+    "id": "65479",
+    "finalsGrade": "3.0"
+  }
 ]
