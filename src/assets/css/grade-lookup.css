@@ -296,7 +296,9 @@
   color: #f8fafc;
   margin-top: 4px;
   line-height: 1.35;
-  word-break: break-word;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  hyphens: none;
 }
 
 .gradeLookup_resultMeta div {
