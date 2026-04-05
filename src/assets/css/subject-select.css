@@ -36,6 +36,19 @@
   outline-offset: 3px;
 }
 
+.subjectSelect_card:disabled {
+  cursor: not-allowed;
+  opacity: 0.56;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2);
+  transform: none;
+}
+
+.subjectSelect_card:disabled:hover {
+  border-color: rgba(148, 163, 184, 0.22);
+  background: #1e1e1e;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2);
+}
+
 .subjectSelect_code {
   font-size: clamp(1.05rem, 1.8vw, 1.15rem);
   font-weight: 700;
@@ -53,4 +66,3 @@
     grid-template-columns: 1fr;
   }
 }
-

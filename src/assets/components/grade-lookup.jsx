@@ -20,11 +20,29 @@ import almost3 from "../gif/allmost3.gif";
 import almost4 from "../gif/allmost4.gif";
 import failedGif from "../gif/failed.gif";
 import { useGradeData } from "../../context/grade-data-context.jsx";
+import backIcon from "../img/back.png";
 
 const searchingGifs = [searching, searching1, searching2, searching3, searching4];
 const notFoundGifs = [notFound1, notFound2, notFound3];
 const congratsGifs = [congrats1, congrats2, congrats3, congrats4];
 const almostGifs = [almost1, almost2, almost3, almost4];
+const NOTE_MODAL_STORAGE_KEY = "itGrades:lookupNoteModalSeen:v1";
+const SUBJECT_SECTION_OPTIONS = {
+  ITCC112: [
+    { value: "section1", label: "Section 1" },
+    { value: "section2", label: "Section 2" },
+    { value: "section4", label: "Section 4" },
+    { value: "section5", label: "Section 5" },
+  ],
+  ITPD1: [
+    { value: "section2", label: "Section 2" },
+    { value: "section4", label: "Section 4" },
+  ],
+  ITCC121: [
+    { value: "section4", label: "Section 4" },
+    { value: "section5", label: "Section 5" },
+  ],
+};
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -129,9 +147,10 @@ function GradeLookup({ onBack = () => {} }) {
   const { subjectKey: rawSubjectKey } = useParams();
   const navigate = useNavigate();
   const subjectKey = (rawSubjectKey || "").toUpperCase();
+  const sectionOptions = SUBJECT_SECTION_OPTIONS[subjectKey] ?? [];
 
   useEffect(() => {
-    if (!["ITCC112", "ITPD1"].includes(subjectKey)) {
+    if (!Object.prototype.hasOwnProperty.call(SUBJECT_SECTION_OPTIONS, subjectKey)) {
       navigate("/lookup", { replace: true });
     }
   }, [subjectKey, navigate]);
@@ -152,6 +171,7 @@ function GradeLookup({ onBack = () => {} }) {
   const [activeGif, setActiveGif] = useState(null);
   const [result, setResult] = useState(null);
   const [performance, setPerformance] = useState(null);
+  const [showNoteModal, setShowNoteModal] = useState(false);
   const timeoutRef = useRef(null);
 
   useEffect(() => {
@@ -161,6 +181,24 @@ function GradeLookup({ onBack = () => {} }) {
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const seen = window.localStorage.getItem(NOTE_MODAL_STORAGE_KEY) === "1";
+    if (!seen) {
+      setShowNoteModal(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    if (!showNoteModal) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [showNoteModal]);
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -276,6 +314,17 @@ function GradeLookup({ onBack = () => {} }) {
     setPerformance(null);
   };
 
+  const closeNoteModal = () => {
+    if (typeof window !== "undefined") {
+      try {
+        window.localStorage.setItem(NOTE_MODAL_STORAGE_KEY, "1");
+      } catch (error) {
+        // Continue even if storage is unavailable
+      }
+    }
+    setShowNoteModal(false);
+  };
+
   const renderStatus = () => {
     switch (status) {
       case "idle":
@@ -342,7 +391,8 @@ function GradeLookup({ onBack = () => {} }) {
     <Motion.div className="gradeLookup" initial="hidden" animate="visible" variants={containerVariants}>
       <Motion.header className="gradeLookup_header" variants={itemVariants}>
         <button type="button" className="gradeLookup_backButton" onClick={handleBack}>
-          {"<"} Homepage
+          <img src={backIcon} alt="" aria-hidden="true" className="gradeLookup_backIcon" />
+          <span>Homepage</span>
         </button>
         <div className="gradeLookup_intro">
           <h1>Final Grade Lookup</h1>
@@ -364,10 +414,11 @@ function GradeLookup({ onBack = () => {} }) {
           <option value="" disabled>
             Please choose your section
           </option>
-          {subjectKey === "ITCC112" && <option value="section1">Section 1</option>}
-          <option value="section2">Section 2</option>
-          <option value="section4">Section 4</option>
-          {subjectKey === "ITCC112" && <option value="section5">Section 5</option>}
+          {sectionOptions.map((section) => (
+            <option key={section.value} value={section.value}>
+              {section.label}
+            </option>
+          ))}
         </select>
         {selectedSection && (
           <>
@@ -407,6 +458,42 @@ function GradeLookup({ onBack = () => {} }) {
         >
           {renderStatus()}
         </Motion.section>
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showNoteModal && (
+          <Motion.div
+            className="gradeLookup_modalBackdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <Motion.div
+              className="gradeLookup_modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="gradeLookupNoteTitle"
+              aria-describedby="gradeLookupNoteDesc"
+              initial={{ opacity: 0, y: 14, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 8, scale: 0.98 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              <p className="gradeLookup_modalLabel">Temporary Note</p>
+              <h2 id="gradeLookupNoteTitle">Before you check your grade</h2>
+              <div id="gradeLookupNoteDesc" className="gradeLookup_modalBody">
+                <p>This grade is your combined Midterm and Pre-Final score from quizzes, activities, and long exams.</p>
+                <ul>
+                  <li>If your grade is 3.0 or below, you do not need to take the Final Exam.</li>
+                  <li>If your grade is 4.0, 5.0, or NC, you need to take the Final Exam.</li>
+                </ul>
+              </div>
+              <button type="button" className="gradeLookup_modalButton" onClick={closeNoteModal}>
+                I Understand
+              </button>
+            </Motion.div>
+          </Motion.div>
+        )}
       </AnimatePresence>
     </Motion.div>
   );

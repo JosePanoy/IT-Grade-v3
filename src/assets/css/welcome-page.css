@@ -186,7 +186,7 @@
 .welcome_footer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 16px;
   padding-top: 16px;
   border-top: 1px solid rgba(148, 163, 184, 0.28);
@@ -194,25 +194,8 @@
   font-size: 0.85rem;
 }
 
-.welcome_footerCopy,
 .welcome_status {
   max-width: 420px;
-}
-
-.welcome_footerCopy a {
-  color: #93c5fd;
-  text-decoration: underline;
-  text-decoration-color: rgba(99, 102, 241, 0.6);
-  transition: color 0.2s ease;
-}
-
-.welcome_footerCopy a:hover {
-  color: #bfdbfe;
-}
-
-.welcome_footerIcon {
-  margin: 0 6px;
-  vertical-align: middle;
 }
 
 .welcome_page button {

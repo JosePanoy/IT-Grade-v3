@@ -3,6 +3,8 @@ import section1 from "../../grades/ITCC112/section1.json";
 import section2 from "../../grades/ITCC112/section2.json";
 import section4 from "../../grades/ITCC112/section4.json";
 import section5 from "../../grades/ITCC112/section5.json";
+import itcc121Section4 from "../../grades/ITCC121/section4.json";
+import itcc121Section5 from "../../grades/ITCC121/section5.json";
 import itpd1Section2 from "../../grades/ITPD1/section2.json";
 import itpd1Section4 from "../../grades/ITPD1/section4.json";
 
@@ -31,6 +33,10 @@ const SUBJECT_SECTION_MAP = {
   ITPD1: {
     section2: { label: "Section 2", records: itpd1Section2 },
     section4: { label: "Section 4", records: itpd1Section4 },
+  },
+  ITCC121: {
+    section4: { label: "Section 4", records: itcc121Section4 },
+    section5: { label: "Section 5", records: itcc121Section5 },
   },
 };
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { motion as Motion } from "framer-motion";
 import "../css/welcome-page.css";
-import { FaRegSmileWink } from "react-icons/fa";
 import WITLogo from "../img/WIT.png";
 
 const containerVariants = {
@@ -25,7 +24,7 @@ function WelcomePage({ onStartLookup = () => {} }) {
           <img className="welcome_logo" src={WITLogo} alt="Western Institute of Technology logo" />
           <div className="welcome_brandText">
             <span className="welcome_school">Western Institute of Technology</span>
-            <span className="welcome_portal">1st Semester Final Grades Portal</span>
+            <span className="welcome_portal">2nd Semester Final Grades Portal</span>
           </div>
         </div>
         <Motion.div className="welcome_session" variants={itemVariants}>
@@ -38,7 +37,7 @@ function WelcomePage({ onStartLookup = () => {} }) {
         <Motion.section className="welcome_hero" variants={itemVariants}>
           <h1 className="welcome_title">Welcome to your grade dashboard.</h1>
           <p className="welcome_subtitle">
-            Review your first semester performance with clarity. Track each subject, understand trends, and stay ready
+            Review your second semester performance with clarity. Track each subject, understand trends, and stay ready
             for what&apos;s next.
           </p>
           <div className="welcome_ctaGroup">
@@ -52,20 +51,14 @@ function WelcomePage({ onStartLookup = () => {} }) {
         <Motion.section className="welcome_note" variants={itemVariants}>
           <h2 className="welcome_noteTitle">From Jan Rasheed Calderon</h2>
           <p className="welcome_noteBody">
-            I built this space so my students can conveniently review their final grades for the semester. Expect more
-            features soon as I continue improving the experience for every section I guide.
+            This portal is my way of sharing your final grades for the 2nd semester. If you have questions about your
+            grade, please approach me personally. Please do not send Messenger DMs for grade concerns.
           </p>
         </Motion.section>
 
       </Motion.main>
 
       <Motion.footer className="welcome_footer" variants={itemVariants}>
-        <div className="welcome_footerCopy">
-          Please follow me on Instagram haha <FaRegSmileWink className="welcome_footerIcon" />{" "}
-          <a href="https://www.instagram.com/Josepanoy" target="_blank" rel="noreferrer">
-            @josepanoy
-          </a>
-        </div>
         <div className="welcome_status">Updates roll out whenever I get the time to fine-tune the portal.</div>
       </Motion.footer>
     </Motion.div>

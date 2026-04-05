@@ -100,6 +100,21 @@
   color: #f8fafc;
 }
 
+.adminBackButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.adminBackButton_icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
 .adminError {
   font-size: 0.88rem;
   color: #fca5a5;

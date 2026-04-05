@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/admin.css";
 import { SUPER_ADMIN_CODE, hasSuperAdminSession, storeSuperAdminSession } from "./auth-utils.js";
+import backIcon from "../img/back.png";
 
 function SuperAdminLogin() {
   const navigate = useNavigate();
@@ -68,10 +69,11 @@ function SuperAdminLogin() {
         </button>
         <button
           type="button"
-          className="adminSecondaryButton"
+          className="adminSecondaryButton adminBackButton"
           onClick={() => navigate("/", { replace: true })}
         >
-          Back to homepage
+          <img src={backIcon} alt="" aria-hidden="true" className="adminBackButton_icon" />
+          <span>Back to homepage</span>
         </button>
       </form>
     </div>

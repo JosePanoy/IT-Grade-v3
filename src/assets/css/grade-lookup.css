@@ -41,6 +41,9 @@
 }
 
 .gradeLookup_backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   border: none;
   background: rgba(37, 99, 235, 0.1);
   color: #bfdbfe;
@@ -51,6 +54,14 @@
   cursor: pointer;
   box-shadow: 0 16px 24px rgba(15, 23, 42, 0.18);
   transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.gradeLookup_backIcon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  border-radius: 4px;
+  flex-shrink: 0;
 }
 
 .gradeLookup_backButton:hover {
@@ -181,7 +192,7 @@
   border:none;
   width: min(800px, 100%);
   margin: 0 auto;
-  margin-top: -10px;
+  margin-top: 0;
 }
 
 .gradeLookup_idle h2 {
@@ -201,7 +212,7 @@
 .gradeLookup_statusCard,
 .gradeLookup_resultCard {
   width: min(760px, 100%);
-  margin: -10px auto;
+  margin: 0 auto;
 }
 
 .gradeLookup_statusCard {
@@ -284,6 +295,8 @@
   font-weight: 600;
   color: #f8fafc;
   margin-top: 4px;
+  line-height: 1.35;
+  word-break: break-word;
 }
 
 .gradeLookup_resultMeta div {
@@ -304,6 +317,90 @@
   border-radius: 20px;
   box-shadow: 0 24px 44px rgba(15, 23, 42, 0.28);
   justify-self: end;
+}
+
+.gradeLookup_modalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(3px);
+}
+
+.gradeLookup_modal {
+  width: min(560px, 100%);
+  max-height: min(86vh, 760px);
+  overflow: auto;
+  border-radius: 20px;
+  padding: 20px;
+  background: #1e293b;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 30px 56px rgba(2, 6, 23, 0.48);
+}
+
+.gradeLookup_modalLabel {
+  margin: 0 0 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #bfdbfe;
+}
+
+.gradeLookup_modal h2 {
+  margin: 0 0 10px;
+  font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+  color: #f8fafc;
+  line-height: 1.25;
+}
+
+.gradeLookup_modalBody {
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.gradeLookup_modalBody p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.gradeLookup_modalBody ul {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+}
+
+.gradeLookup_modalBody li {
+  line-height: 1.5;
+}
+
+.gradeLookup_modalButton {
+  margin-top: 16px;
+  width: 100%;
+  min-height: 44px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2563eb, #6366f1);
+  color: #f8fafc;
+  font-size: 0.96rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 16px 30px rgba(37, 99, 235, 0.28);
+}
+
+.gradeLookup_modalButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 34px rgba(79, 70, 229, 0.3);
+}
+
+.gradeLookup_modalButton:focus-visible {
+  outline: 3px solid rgba(147, 197, 253, 0.42);
+  outline-offset: 3px;
 }
 
 @media (max-width: 640px) {
@@ -347,22 +444,39 @@
   }
 
   .gradeLookup_resultCard {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
     align-items: start;
   }
 
   .gradeLookup_resultMeta {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px 16px;
+    gap: 10px 12px;
   }
 
   .gradeLookup_resultMeta div {
     align-items: flex-start;
+    background: rgba(148, 163, 184, 0.08);
+    border-radius: 14px;
+    padding: 10px 12px;
+  }
+
+  .gradeLookup_resultMeta dt,
+  .gradeLookup_resultMeta dd {
+    text-align: left;
   }
 
   .gradeLookup_resultGif {
-    width: min(45vw, 180px);
-    justify-self: end;
+    width: min(68vw, 230px);
+    justify-self: center;
+  }
+
+  .gradeLookup_modalBackdrop {
+    padding: 16px;
+  }
+
+  .gradeLookup_modal {
+    padding: 16px;
   }
 }
 
@@ -381,11 +495,12 @@
 
   .gradeLookup_resultCard {
     grid-template-columns: minmax(0, 1fr);
-    gap: 10px;
+    gap: 14px;
     justify-items: stretch;
     text-align: left;
-    width: calc(100% + 20px);
-    margin: -10px -10px;
+    width: 100%;
+    margin: 0;
+    padding: 16px 10px;
   }
 
   .gradeLookup_resultDetails {
@@ -398,24 +513,43 @@
   }
 
   .gradeLookup_resultMeta {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
     width: 100%;
-    text-align: center;
+    text-align: left;
   }
 
   .gradeLookup_resultMeta div {
     width: 100%;
-    align-items: center;
+    align-items: flex-start;
+    min-height: 78px;
   }
 
   .gradeLookup_resultMeta dt,
   .gradeLookup_resultMeta dd {
-    text-align: center;
+    text-align: left;
+  }
+
+  .gradeLookup_resultMeta dt {
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+  }
+
+  .gradeLookup_resultMeta dd {
+    font-size: 1rem;
   }
 
   .gradeLookup_resultGif {
     width: min(70vw, 220px);
     justify-self: center;
+  }
+
+  .gradeLookup_modalLabel {
+    font-size: 0.74rem;
+  }
+
+  .gradeLookup_modalBody p,
+  .gradeLookup_modalBody li {
+    font-size: 0.92rem;
   }
 }
