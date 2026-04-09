@@ -7,6 +7,8 @@ import itcc121Section4 from "../../grades/ITCC121/section4.json";
 import itcc121Section5 from "../../grades/ITCC121/section5.json";
 import itpd1Section2 from "../../grades/ITPD1/section2.json";
 import itpd1Section4 from "../../grades/ITPD1/section4.json";
+import itpd3Section1 from "../../grades/ITPD3/DataScience.json";
+import itpcn1Section1 from "../../grades/ITPCN1/Networking1.json";
 
 const STORAGE_KEY = "itGrades:studentsBySubject";
 const LEGACY_STORAGE_KEY = "itGrades:students";
@@ -37,6 +39,12 @@ const SUBJECT_SECTION_MAP = {
   ITCC121: {
     section4: { label: "Section 4", records: itcc121Section4 },
     section5: { label: "Section 5", records: itcc121Section5 },
+  },
+  ITPD3: {
+    section1: { label: "Section 1", records: itpd3Section1 },
+  },
+  ITPCN1: {
+    section1: { label: "Section 1", records: itpcn1Section1 },
   },
 };
 

@@ -42,6 +42,8 @@ const SUBJECT_SECTION_OPTIONS = {
     { value: "section4", label: "Section 4" },
     { value: "section5", label: "Section 5" },
   ],
+  ITPD3: [{ value: "section1", label: "Section 1" }],
+  ITPCN1: [{ value: "section1", label: "Section 1" }],
 };
 
 const containerVariants = {
@@ -157,6 +159,16 @@ function GradeLookup({ onBack = () => {} }) {
 
   const { studentsBySubject } = useGradeData();
   const [selectedSection, setSelectedSection] = useState("");
+  const hasMultipleSections = sectionOptions.length > 1;
+
+  useEffect(() => {
+    if (sectionOptions.length === 1) {
+      setSelectedSection(sectionOptions[0].value);
+      return;
+    }
+    setSelectedSection("");
+  }, [subjectKey, sectionOptions]);
+
   const gradeRecords = useMemo(() => {
     if (!selectedSection) {
       return [];
@@ -401,28 +413,34 @@ function GradeLookup({ onBack = () => {} }) {
       </Motion.header>
 
       <Motion.form className="gradeLookup_form" onSubmit={handleSearch} variants={itemVariants}>
-        <label htmlFor="gradeLookupSection" className="gradeLookup_label">
-          Section
-        </label>
-        <select
-          id="gradeLookupSection"
-          name="gradeLookupSection"
-          className="gradeLookup_select"
-          value={selectedSection}
-          onChange={handleSectionChange}
-        >
-          <option value="" disabled>
-            Please choose your section
-          </option>
-          {sectionOptions.map((section) => (
-            <option key={section.value} value={section.value}>
-              {section.label}
-            </option>
-          ))}
-        </select>
+        {hasMultipleSections && (
+          <>
+            <label htmlFor="gradeLookupSection" className="gradeLookup_label">
+              Section
+            </label>
+            <select
+              id="gradeLookupSection"
+              name="gradeLookupSection"
+              className="gradeLookup_select"
+              value={selectedSection}
+              onChange={handleSectionChange}
+            >
+              <option value="" disabled>
+                Please choose your section
+              </option>
+              {sectionOptions.map((section) => (
+                <option key={section.value} value={section.value}>
+                  {section.label}
+                </option>
+              ))}
+            </select>
+          </>
+        )}
         {selectedSection && (
           <>
-            <p className="gradeLookup_hint">Tip: Choose your section and use your ID for the quickest match.</p>
+            <p className="gradeLookup_hint">
+              {hasMultipleSections ? "Tip: Choose your section and use your ID for the quickest match." : "Tip: Use your ID for the quickest match."}
+            </p>
             <label htmlFor="gradeLookupQuery" className="gradeLookup_label">
               Student identifier
             </label>

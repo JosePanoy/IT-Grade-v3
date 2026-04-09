@@ -39,6 +39,18 @@ function SubjectSelect() {
               <span className="subjectSelect_hint">Tap to continue</span>
             </button>
           </li>
+          <li>
+            <button type="button" className="subjectSelect_card" onClick={() => navigate("/lookup/ITPD3")}>
+              <span className="subjectSelect_code">ITPD3</span>
+              <span className="subjectSelect_hint">Tap to continue</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" className="subjectSelect_card" onClick={() => navigate("/lookup/ITPCN1")}>
+              <span className="subjectSelect_code">ITPCN1</span>
+              <span className="subjectSelect_hint">Tap to continue</span>
+            </button>
+          </li>
         </ul>
       </main>
     </div>
