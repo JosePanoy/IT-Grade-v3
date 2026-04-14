@@ -500,11 +500,9 @@ function GradeLookup({ onBack = () => {} }) {
               <p className="gradeLookup_modalLabel">Temporary Note</p>
               <h2 id="gradeLookupNoteTitle">Before you check your grade</h2>
               <div id="gradeLookupNoteDesc" className="gradeLookup_modalBody">
-                <p>This grade is your combined Midterm and Pre-Final score from quizzes, activities, and long exams.</p>
-                <ul>
-                  <li>If your grade is 3.0 or below, you do not need to take the Final Exam.</li>
-                  <li>If your grade is 4.0, 5.0, or NC, you need to take the Final Exam.</li>
-                </ul>
+                <p>This is your final grade for 2nd sem at ITCC121.</p>
+                <p>If you have questions, do not DM me on Messenger. Approach me or find me at school.</p>
+                <p>Congratulations to those who passed. For those who did not, you can take it this summer in May.</p>
               </div>
               <button type="button" className="gradeLookup_modalButton" onClick={closeNoteModal}>
                 I Understand
