@@ -2,7 +2,7 @@
   {
     "lastName": "ALAMON",
     "id": "63607",
-    "finalsGrade": "2.75"
+    "finalsGrade": "3.0"
   },
   {
     "lastName": "ALOB",
@@ -12,32 +12,32 @@
   {
     "lastName": "ANGELITUD",
     "id": "68051",
-    "finalsGrade": "2.5"
+    "finalsGrade": "2.75"
   },
   {
     "lastName": "BALORIA",
     "id": "66407",
-    "finalsGrade": "4.0"
+    "finalsGrade": "5.0"
   },
   {
     "lastName": "BERNAS",
     "id": "68518",
-    "finalsGrade": "2.25"
+    "finalsGrade": "2.75"
   },
   {
     "lastName": "BIOGOS",
     "id": "65622",
-    "finalsGrade": "2.25"
+    "finalsGrade": "2.5"
   },
   {
     "lastName": "CAMARISTA",
     "id": "64205",
-    "finalsGrade": "4.0"
+    "finalsGrade": "5.0"
   },
   {
     "lastName": "CANDIDO",
     "id": "67832",
-    "finalsGrade": "4.0"
+    "finalsGrade": "NC"
   },
   {
     "lastName": "CONTE",
@@ -47,17 +47,17 @@
   {
     "lastName": "DEL MUNDO",
     "id": "68153",
-    "finalsGrade": "2.75"
+    "finalsGrade": "3.0"
   },
   {
     "lastName": "DEOCARES",
     "id": "67272",
-    "finalsGrade": "2.75"
+    "finalsGrade": "3.0"
   },
   {
     "lastName": "DEPRA",
     "id": "54588",
-    "finalsGrade": "4.0"
+    "finalsGrade": "5.0"
   },
   {
     "lastName": "ESTEBAN",
@@ -67,17 +67,17 @@
   {
     "lastName": "ESTIMADA",
     "id": "67921",
-    "finalsGrade": "4.0"
+    "finalsGrade": "5.0"
   },
   {
     "lastName": "FALSIS",
     "id": "66855",
-    "finalsGrade": "4.0"
+    "finalsGrade": "5.0"
   },
   {
     "lastName": "FLORENDO",
     "id": "67863",
-    "finalsGrade": "2.25"
+    "finalsGrade": "2.5"
   },
   {
     "lastName": "GAYONGO",
@@ -87,17 +87,17 @@
   {
     "lastName": "GONZAGA",
     "id": "67829",
-    "finalsGrade": "2.75"
+    "finalsGrade": "3.0"
   },
   {
     "lastName": "GOTERA",
     "id": "67405",
-    "finalsGrade": "2.75"
+    "finalsGrade": "3.0"
   },
   {
     "lastName": "GROZEN",
     "id": "67259",
-    "finalsGrade": "4.0"
+    "finalsGrade": "5.0"
   },
   {
     "lastName": "GUANCO",
@@ -107,7 +107,7 @@
   {
     "lastName": "HECHANOVA",
     "id": "67986",
-    "finalsGrade": "3.0"
+    "finalsGrade": "2.75"
   },
   {
     "lastName": "JAYME",
@@ -117,7 +117,7 @@
   {
     "lastName": "JOLO",
     "id": "68006",
-    "finalsGrade": "3.0"
+    "finalsGrade": "2.75"
   },
   {
     "lastName": "LACAYA",
@@ -137,7 +137,7 @@
   {
     "lastName": "LICOS",
     "id": "66935",
-    "finalsGrade": "4.0"
+    "finalsGrade": "3.0"
   },
   {
     "lastName": "PATALEN",
@@ -157,22 +157,22 @@
   {
     "lastName": "PUE",
     "id": "66163",
-    "finalsGrade": "3.0"
+    "finalsGrade": "2.75"
   },
   {
     "lastName": "RAMOS",
     "id": "66742",
-    "finalsGrade": "2.5"
+    "finalsGrade": "2.75"
   },
   {
     "lastName": "SANTIA",
     "id": "51870",
-    "finalsGrade": "2.75"
+    "finalsGrade": "3.0"
   },
   {
     "lastName": "SENOBIN",
     "id": "68165",
-    "finalsGrade": "4.0"
+    "finalsGrade": "5.0"
   },
   {
     "lastName": "SULTAN",
@@ -182,12 +182,12 @@
   {
     "lastName": "VASQUEZ",
     "id": "60818",
-    "finalsGrade": "4.0"
+    "finalsGrade": "NC"
   },
   {
     "lastName": "VERANO",
     "id": "67221",
-    "finalsGrade": "4.0"
+    "finalsGrade": "5.0"
   },
   {
     "lastName": "VILLARUEL",
@@ -197,6 +197,6 @@
   {
     "lastName": "YBAÑEZ",
     "id": "67944",
-    "finalsGrade": "2.25"
+    "finalsGrade": "2.5"
   }
 ]
