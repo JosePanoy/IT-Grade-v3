@@ -10,11 +10,7 @@ import itpd1Section4 from "../../grades/ITPD1/section4.json";
 import itpd3Section1 from "../../grades/ITPD3/DataScience.json";
 import itpcn1Section1 from "../../grades/ITPCN1/Networking1.json";
 
-const STORAGE_KEY = "itGrades:studentsBySubject";
-const LEGACY_STORAGE_KEY = "itGrades:students";
-// Bump this when packaged grade JSON changes to force refresh from source
-const VERSION_KEY = "itGrades:dataVersion";
-const DATA_VERSION = "2025-11-05.v2";
+const STALE_GRADE_STORAGE_KEYS = ["itGrades:studentsBySubject", "itGrades:students", "itGrades:dataVersion"];
 
 const GradeDataContext = createContext(null);
 
@@ -58,49 +54,6 @@ function formatRecords(records = [], sectionKey) {
 }
 
 function loadInitialData() {
-  const get = (key) => (typeof window !== "undefined" ? window.localStorage.getItem(key) : null);
-
-  // If stored data is from an older build, ignore it and use packaged JSON.
-  const storedVersion = get(VERSION_KEY);
-  const storedNew = get(STORAGE_KEY);
-  if (storedVersion === DATA_VERSION && storedNew) {
-    try {
-      const parsed = JSON.parse(storedNew);
-      if (parsed && typeof parsed === "object") {
-        // Ensure any newly added sections (e.g., section1) are present
-        const merged = clone(parsed);
-        for (const [subjectKey, sections] of Object.entries(SUBJECT_SECTION_MAP)) {
-          merged[subjectKey] = merged[subjectKey] ?? {};
-          for (const [sectionKey, value] of Object.entries(sections)) {
-            if (!Array.isArray(merged[subjectKey][sectionKey])) {
-              merged[subjectKey][sectionKey] = formatRecords(value.records, sectionKey);
-            }
-          }
-        }
-        return merged;
-      }
-    } catch (error) {
-      console.warn("[GradeData] Failed to parse stored subject data. Falling back to migration/defaults.", error);
-    }
-  }
-
-  const storedLegacy = get(LEGACY_STORAGE_KEY);
-  if (storedLegacy) {
-    try {
-      const parsedLegacy = JSON.parse(storedLegacy);
-      if (parsedLegacy && typeof parsedLegacy === "object") {
-        const itcc112 = parsedLegacy;
-        const itpd1 = Object.entries(SUBJECT_SECTION_MAP.ITPD1).reduce((acc, [sectionKey, value]) => {
-          acc[sectionKey] = formatRecords(value.records, sectionKey);
-          return acc;
-        }, {});
-        return { ITCC112: itcc112, ITPD1: itpd1 };
-      }
-    } catch (error) {
-      console.warn("[GradeData] Failed to parse legacy data. Falling back to defaults.", error);
-    }
-  }
-
   return Object.entries(SUBJECT_SECTION_MAP).reduce((subjectAcc, [subjectKey, sections]) => {
     subjectAcc[subjectKey] = Object.entries(sections).reduce((acc, [sectionKey, value]) => {
       acc[sectionKey] = formatRecords(value.records, sectionKey);
@@ -115,15 +68,8 @@ export function GradeDataProvider({ children }) {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(studentsBySubject));
-      window.localStorage.setItem(VERSION_KEY, DATA_VERSION);
-      window.localStorage.removeItem(LEGACY_STORAGE_KEY);
-    } catch (error) {
-      // Keep app functional even if storage fails
-      console.warn("[GradeData] Failed to persist subject data to localStorage.", error);
-    }
-  }, [studentsBySubject]);
+    STALE_GRADE_STORAGE_KEYS.forEach((key) => window.localStorage.removeItem(key));
+  }, []);
 
   const studentsBySection = useMemo(() => studentsBySubject.ITCC112 ?? {}, [studentsBySubject]);
 

@@ -7,12 +7,12 @@
   {
     "lastName": "ARCEÑO",
     "id": "47506",
-    "finalsGrade": "2.25"
+    "finalsGrade": "2.0"
   },
   {
     "lastName": "ARROYO",
     "id": "65775",
-    "finalsGrade": "3.0"
+    "finalsGrade": "2.75"
   },
   {
     "lastName": "ASIS",
@@ -22,7 +22,7 @@
   {
     "lastName": "BARRAMEDA",
     "id": "64688",
-    "finalsGrade": "5.0"
+    "finalsGrade": "NC"
   },
   {
     "lastName": "CASIPLE",
@@ -37,62 +37,62 @@
   {
     "lastName": "COLUD",
     "id": "62277",
-    "finalsGrade": "4.0"
+    "finalsGrade": "3.0"
   },
   {
     "lastName": "DAVID",
     "id": "38948",
-    "finalsGrade": "4.0"
+    "finalsGrade": "3.0"
   },
   {
     "lastName": "DAYADAY",
     "id": "64612",
-    "finalsGrade": "4.0"
+    "finalsGrade": "3.0"
   },
   {
     "lastName": "EMOLAGA",
     "id": "64485",
-    "finalsGrade": "4.0"
+    "finalsGrade": "5.0"
   },
   {
     "lastName": "FORCADO",
     "id": "65645",
-    "finalsGrade": "2.25"
+    "finalsGrade": "2.0"
   },
   {
     "lastName": "FUNA",
     "id": "54632",
-    "finalsGrade": "5.0"
+    "finalsGrade": "NC"
   },
   {
     "lastName": "FUNTINILLA",
     "id": "64610",
-    "finalsGrade": "2.5"
+    "finalsGrade": "2.75"
   },
   {
     "lastName": "GALLANO",
     "id": "64390",
-    "finalsGrade": "4.0"
+    "finalsGrade": "3.0"
   },
   {
     "lastName": "GOLEZ",
     "id": "65927",
-    "finalsGrade": "2.75"
+    "finalsGrade": "2.5"
   },
   {
     "lastName": "GURKE",
     "id": "63130",
-    "finalsGrade": "4.0"
+    "finalsGrade": "3.0"
   },
   {
     "lastName": "JAPITANA",
     "id": "63746",
-    "finalsGrade": "4.0"
+    "finalsGrade": "5.0"
   },
   {
     "lastName": "MALLORCA",
     "id": "64572",
-    "finalsGrade": "4.0"
+    "finalsGrade": "3.0"
   },
   {
     "lastName": "MERIONES",
@@ -102,12 +102,12 @@
   {
     "lastName": "OLIVEROS",
     "id": "64690",
-    "finalsGrade": "5.0"
+    "finalsGrade": "NC"
   },
   {
     "lastName": "PANES",
     "id": "60019",
-    "finalsGrade": "4.0"
+    "finalsGrade": "2.75"
   },
   {
     "lastName": "PASMALA",
@@ -122,27 +122,27 @@
   {
     "lastName": "POSECION",
     "id": "53117",
-    "finalsGrade": "4.0"
+    "finalsGrade": "3.0"
   },
   {
     "lastName": "RAMOS",
     "id": "65975",
-    "finalsGrade": "4.0"
+    "finalsGrade": "5.0"
   },
   {
     "lastName": "TABERNA",
     "id": "46107",
-    "finalsGrade": "3.0"
+    "finalsGrade": "2.5"
   },
   {
     "lastName": "TACHADO",
     "id": "65879",
-    "finalsGrade": "3.0"
+    "finalsGrade": "2.75"
   },
   {
     "lastName": "TALAGON",
     "id": "65306",
-    "finalsGrade": "3.0"
+    "finalsGrade": "2.75"
   },
   {
     "lastName": "TUPAS",
@@ -152,6 +152,6 @@
   {
     "lastName": "YA-UN",
     "id": "65648",
-    "finalsGrade": "2.5"
+    "finalsGrade": "2.25"
   }
 ]
